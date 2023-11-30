@@ -1,0 +1,101 @@
+﻿@model List<ProductModel>
+
+@{
+    ViewData["Title"] = "Show Products";
+}
+
+
+@section Scripts{
+
+
+    <script defer >
+
+        function deleteProduct(id) {
+
+
+            yesORno = confirm("Hey are u sure about that?")
+
+            if (yesORno === false) return;
+            
+            
+            
+            $.ajax({
+
+                url: "/Admin/Product/Delete/" + id,
+                type: "DELETE",
+                success: () => {
+                    alert("Deleted")
+                    window.location.reload()
+                },
+                error: () => {
+                    alert("Bad thing happened :((")
+                }
+            })
+        
+        
+        }
+    
+
+
+    </script>
+
+
+}
+
+
+<div class="container-fluid p-3">
+
+
+    <h1 class="display-1 mb-3">Show Products</h1>
+    <a asp-action="Create" asp-controller="Product">
+        <button type="button" class="btn-success btn">Create New!</button>
+    </a>
+    
+    <table class="table mt-5">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">NAME</th>
+                <th scope="col">PRICE</th>
+                <th scope="col">DESCRIPTION</th>
+                <th scope="col">IMAGE(S)</th>
+                <th scope="col">ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(ProductModel pro in Model)
+            {
+                <tr>
+
+                    <td>@pro.Id</td>
+                    <td>@pro.Name</td>
+                    <td>@pro.Price</td>
+                    <td>@pro.Description</td>
+                    <td>
+
+                        @foreach(ProductImageModel img in pro.Images.ToList())
+                        {
+                           @* can be image itself but lazy enough to implement front end nice ui*@
+                        <p>@img.Filename</p>
+
+
+                        }
+
+
+                    </td>
+                    <td>
+                        <a asp-action="Update" asp-controller="Product" asp-route-id="@pro.Id">
+                            
+                            <button class="btn btn-warning"> UPDATE</button>
+                        </a>
+                        <button class="btn btn-danger" onclick="deleteProduct(@(pro.Id))">DELETE</button>
+                    </td>
+
+                </tr>
+            }
+
+    
+            </tr>
+        </tbody>
+    </table>
+</div>

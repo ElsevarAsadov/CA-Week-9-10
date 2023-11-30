@@ -1,0 +1,85 @@
+﻿@model List<ColorModel>
+
+@{
+    ViewData["Title"] = "Show Product Colors";
+}
+
+
+@section Scripts{
+
+
+    <script defer>
+
+        function deleteProduct(id) {
+
+
+            yesORno = confirm("Hey are u sure about that?")
+
+            if (yesORno === false) return;
+
+
+
+            $.ajax({
+
+                url: "/Admin/Color/Delete/" + id,
+                type: "DELETE",
+                success: () => {
+                    alert("Deleted")
+                    //fake react
+                    window.location.reload()
+                },
+                error: () => {
+                    alert("Bad thing happened :((")
+                }
+            })
+
+
+        }
+
+
+
+    </script>
+
+
+}
+
+
+<div class="container-fluid p-3">
+
+
+    <h1 class="display-1 mb-3">Show Colors</h1>
+    <a asp-action="Create" asp-controller="Color">
+        <button type="button" class="btn-success btn">Create New!</button>
+    </a>
+
+    <table class="table mt-5">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">NAME</th>
+                <th scope="col">ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ColorModel color in Model)
+            {
+                <tr>
+
+                    <td>@color.Id</td>
+                    <td>@color.Name</td>
+                    <td>
+                        <a asp-action="Update" asp-controller="Color" asp-route-id="@color.Id">
+
+                            <button class="btn btn-warning"> UPDATE</button>
+                        </a>
+                        <button class="btn btn-danger" onclick="deleteProduct(@(color.Id))">DELETE</button>
+                    </td>
+
+                </tr>
+            }
+
+
+            </tr>
+        </tbody>
+    </table>
+</div>

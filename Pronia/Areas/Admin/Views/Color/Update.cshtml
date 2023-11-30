@@ -1,0 +1,33 @@
+﻿@model ColorModel
+
+@{
+    ViewData["Title"] = "Create Product Color";
+}
+
+
+
+<div class="container-fluid p-3">
+
+
+    <form method="POST" enctype="multipart/form-data" asp-controller="Color" asp-action="Update">
+
+
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" c class="form-control">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+
+
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
+</div>
+
+
+
+

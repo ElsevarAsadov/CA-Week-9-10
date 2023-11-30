@@ -1,0 +1,78 @@
+﻿@model ProductModel
+@{
+    ViewData["Title"] = "Create Product";
+}
+
+
+<div class="container-fluid p-3">
+
+
+    <form method="POST" enctype="multipart/form-data" asp-controller="Product" asp-action="Update">
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" c class="form-control">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Price" class="form-label"></label>
+            <input asp-for="Price" c class="form-control">
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label"></label>
+            <input asp-for="Description" c class="form-control">
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+
+        <div class="mb-3">
+            <label asp-for="ProductImages" class="form-label"></label>
+            <input asp-for="ProductImages" c class="form-control">
+            <span asp-validation-for="ProductImages" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="MainImage" class="form-label"></label>
+            <input asp-for="MainImage" c class="form-control">
+            <span asp-validation-for="MainImage" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="HoverImage" class="form-label"></label>
+            <input asp-for="HoverImage" c class="form-control">
+            <span asp-validation-for="HoverImage" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ColorIds" class="form-label"></label>
+
+
+            <select asp-for="ColorIds">
+                @foreach (ColorModel color in ViewBag.Colors)
+                {
+
+
+
+                    <option value="@color.Id">@color.Name</option>
+
+
+
+
+                }
+            </select>
+
+
+
+            <span asp-validation-for="ColorIds" class="text-danger"></span>
+        </div>
+
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
+</div>
